@@ -1,21 +1,23 @@
 package jaein.crudpractice.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Loan {
 
     @Id @GeneratedValue
     @Column(name = "loan_id")
     private Long id;
 
+    @OneToOne(mappedBy = "loan", fetch = FetchType.LAZY)
     private Order order;
 
-    private LoanState state;
+    @Enumerated(value = EnumType.STRING)
+    private LoanState state;    //CAN, CANT
 }
