@@ -2,28 +2,25 @@ package jaein.crudpractice.repository;
 
 import jaein.crudpractice.domain.Student;
 import jakarta.persistence.EntityManager;
-import org.assertj.core.api.Assertions;
+import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-class StudentRepositoryTest {
+public class StudentRepositoryTest {
+
+    @PersistenceContext
+    EntityManager em;
 
     @Autowired
     StudentRepository studentRepository;
-
-    @Autowired
-    EntityManager em;
 
     @Test
 //    @Rollback(value = false)
@@ -45,11 +42,12 @@ class StudentRepositoryTest {
         studentRepository.save(student);
 
         //when
-        Student one = studentRepository.findOne(student.getId());
+        Student one = studentRepository.findById(student.getId()).get();
         List<Student> all = studentRepository.findAll();
         List<Student> byName = studentRepository.findByName("kim");
         List<Student> byNum = studentRepository.findByNum(100);
         List<Student> byDept = studentRepository.findByDept("A");
+        List<Student> findUser = studentRepository.findUser("kim", 100);
 
         //then
         assertThat(one).isEqualTo(student);
@@ -57,6 +55,6 @@ class StudentRepositoryTest {
         assertThat(byName).containsExactly(student);
         assertThat(byNum).containsExactly(student);
         assertThat(byDept).containsExactly(student);
+        assertThat(findUser).containsExactly(student);
     }
-
 }
