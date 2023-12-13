@@ -18,7 +18,7 @@ public class Student {
     @Column(name = "student_id")
     private Long id;
 
-    private Long num; //학번
+    private int num; //학번
 
     private String name; //이름
 
@@ -27,4 +27,9 @@ public class Student {
     @OneToMany(mappedBy = "student")
     private List<Order> orders = new ArrayList<>();
 
+    public Student(int num, String name, String dept) {
+        this.num = num;
+        this.name = name;
+        this.dept = dept;
+    }
 }
