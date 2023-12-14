@@ -20,7 +20,7 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id")
     private Student student;
 
@@ -34,5 +34,10 @@ public class Order {
     private Date loanDate; //대출일
 
     private Date returnDate; //반납일
+
+    public Order(Student student) {
+        this.student = student;
+    }
+
 
 }
