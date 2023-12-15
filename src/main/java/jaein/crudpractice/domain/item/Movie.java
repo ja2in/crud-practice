@@ -11,4 +11,8 @@ import lombok.Setter;
 public class Movie extends Item{
 
     private String director;
+
+    public Movie(String director) {
+        this.director = director;
+    }
 }
