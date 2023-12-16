@@ -8,7 +8,6 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Loan {
 
     @Id @GeneratedValue
@@ -19,5 +18,5 @@ public class Loan {
     private Order order;
 
     @Enumerated(value = EnumType.STRING)
-    private LoanState state;    //CAN, CANT
+    private LoanState state;    //O, X
 }
