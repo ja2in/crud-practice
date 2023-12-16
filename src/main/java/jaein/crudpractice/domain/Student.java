@@ -11,7 +11,6 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Student {
 
     @Id @GeneratedValue
@@ -31,5 +30,8 @@ public class Student {
         this.num = num;
         this.name = name;
         this.dept = dept;
+    }
+
+    public Student() {
     }
 }
