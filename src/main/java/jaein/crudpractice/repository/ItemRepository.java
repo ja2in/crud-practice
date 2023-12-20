@@ -26,4 +26,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
      */
     @Query("select m from Movie m where director = :director")
     List<Movie> findByDirector(@Param("director") String director);
+
+    @Query("select i from Item i where i.id = :id")
+    Item findOne(@Param("id") Long id);
 }
