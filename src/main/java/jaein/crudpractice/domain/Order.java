@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +29,7 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "loan_id")
     private Loan loan; //대출
 
@@ -44,11 +45,24 @@ public class Order {
     }
 
 
-    public static Order createOrder(Optional<Student> student, Loan loan, OrderItem... orderItems) {
-        Order order = new Order();
-        Student student1 = student.orElseThrow(() -> new IllegalArgumentException("no such student"));
+//    public static Order createOrder(student, Loan loan, OrderItem... orderItems) {
+//        Order order = new Order();
+//
+//        order.setStudent(student);
+//        order.setLoan(loan);
+//        for (OrderItem orderItem : orderItems) {
+//            order.addOrderItem(orderItem);
+//        }
+//
+//        order.setStatus(OrderStatus.CAN);
+//        order.setLoanDate(new Date());
+//        return order;
+//
+//    }
 
-        order.setStudent(student1);
+    public static Order createOrder(Student student, Loan loan, OrderItem... orderItems){
+        Order order = new Order();
+        order.setStudent(student);
         order.setLoan(loan);
         for (OrderItem orderItem : orderItems) {
             order.addOrderItem(orderItem);
@@ -57,7 +71,6 @@ public class Order {
         order.setStatus(OrderStatus.CAN);
         order.setLoanDate(new Date());
         return order;
-
     }
 
     private void addOrderItem(OrderItem orderItem) {
