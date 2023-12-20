@@ -23,8 +23,8 @@ public class OrderService {
 
     public Long order(Long studentId, Long itemId, int count){
         //엔티티 조회
-        Optional<Student> student = studentRepository.findById(studentId);
-        Optional<Item> item = itemRepository.findById(itemId);
+        Student student = studentRepository.findOne(studentId);
+        Item item = itemRepository.findOne(itemId);
 
         //대여 정보 조회
         Loan loan = new Loan();
@@ -43,8 +43,7 @@ public class OrderService {
 
     //주문 취소
     public void cancelOrder(Long orderId){
-        Optional<Order> byId = orderRepository.findById(orderId);
-        Order order = byId.orElseThrow(() -> new IllegalArgumentException("no such orderId"));
+        Order order = orderRepository.findOne(orderId);
         order.cancel();
     }
 }
