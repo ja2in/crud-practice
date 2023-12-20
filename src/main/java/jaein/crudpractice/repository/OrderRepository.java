@@ -14,4 +14,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("select o from Order o join o.student s where s.name = :name")
     List<Order> findByStudentName(@Param("name") String name);
 
+정    @Query("select o from Order o where o.id = :id")
+    Order findOne(@Param("id") Long id);
+
 }
