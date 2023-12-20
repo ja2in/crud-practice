@@ -22,4 +22,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     @Query("select s from Student s where s.name = :name and s.num = :num")
     List<Student> findUser(@Param("name") String name, @Param("num") int num);
+
+    @Query("select s from Student s where s.id = :id")
+    Student findOne(@Param("id") Long id);
 }
