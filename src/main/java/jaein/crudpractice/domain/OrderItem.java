@@ -28,14 +28,12 @@ public class OrderItem {
 
     private int count; //도서 갯수
 
-    public static OrderItem createOrderItem(Optional<Item> item, int count) {
+    public static OrderItem createOrderItem(Item item, int count) {
         OrderItem orderItem = new OrderItem();
-        Item item1 = item.orElseThrow(() -> new IllegalArgumentException("no such item"));
-
-        orderItem.setItem(item.orElse(null));
+        orderItem.setItem(item);
         orderItem.setCount(count);
 
-        item1.removeStock(count);  //주문이 들어오면 수량이 줄어든다.
+        item.removeStock(count);  //주문이 들어오면 수량이 줄어든다.
         return orderItem;
     }
 
