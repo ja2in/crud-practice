@@ -7,3 +7,4 @@ JPA 강의를 통해 배운 CRUD 기능을 연습해 보기 위해 진행중인 
 * JAVA 17
 * SpringBoot 3.1.5
 * H2 Database
+* Postman
