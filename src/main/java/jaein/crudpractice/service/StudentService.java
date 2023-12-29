@@ -39,4 +39,10 @@ public class StudentService {
 
         return student;
     }
+
+    @Transactional
+    public void update(Long id, String name) {
+        Student student = studentRepository.findOne(id);
+        student.setName(name);
+    }
 }
