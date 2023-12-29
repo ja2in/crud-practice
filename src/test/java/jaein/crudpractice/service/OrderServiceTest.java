@@ -1,4 +1,4 @@
-거package jaein.crudpractice.service;
+package jaein.crudpractice.service;
 
 import jaein.crudpractice.domain.Order;
 import jaein.crudpractice.domain.OrderStatus;
@@ -11,6 +11,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.text.html.Option;
@@ -45,7 +46,6 @@ class OrderServiceTest {
 
         //then
         Order getOrder = orderRepository.findOne(orderId);
-
 
         assertEquals(OrderStatus.CAN, getOrder.getStatus(), "도서대여 가능 상태");
         assertEquals(1, getOrder.getOrderItems().size(), "주문한 상품 종류 수가 일치");
