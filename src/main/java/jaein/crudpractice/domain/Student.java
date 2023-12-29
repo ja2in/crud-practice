@@ -1,6 +1,8 @@
 package jaein.crudpractice.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,7 @@ public class Student {
 
     private int num; //학번
 
+    @NotEmpty
     private String name; //이름
 
     private String dept; //과
