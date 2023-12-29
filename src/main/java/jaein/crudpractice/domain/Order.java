@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Entity
 @Table(name = "orders")
@@ -26,7 +23,7 @@ public class Order {
     @JoinColumn(name = "student_id")
     private Student student;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -69,7 +66,16 @@ public class Order {
         }
 
         order.setStatus(OrderStatus.CAN);
-        order.setLoanDate(new Date());
+        Date now = new Date();
+        Date back = new Date();
+
+        Calendar cal = Calendar.getInstance();  //반납일 추가
+        cal.setTime(now);
+        cal.add(Calendar.DATE, 14);
+        back = cal.getTime();
+
+        order.setLoanDate(now);
+        order.setReturnDate(back);
         return order;
     }
 
