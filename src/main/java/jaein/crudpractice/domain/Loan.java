@@ -1,5 +1,6 @@
 package jaein.crudpractice.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -14,6 +15,7 @@ public class Loan {
     @Column(name = "loan_id")
     private Long id;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "loan", fetch = FetchType.LAZY)
     private Order order;
 

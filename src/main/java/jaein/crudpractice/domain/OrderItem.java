@@ -1,5 +1,6 @@
 package jaein.crudpractice.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jaein.crudpractice.domain.item.Item;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -18,6 +19,7 @@ public class OrderItem {
     @Column(name = "order_item_id")
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;

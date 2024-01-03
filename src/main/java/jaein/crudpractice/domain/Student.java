@@ -26,6 +26,7 @@ public class Student {
 
     private String dept; //과
 
+    @JsonIgnore
     @OneToMany(mappedBy = "student")
     private List<Order> orders = new ArrayList<>();
 
