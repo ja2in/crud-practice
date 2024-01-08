@@ -25,7 +25,7 @@ public class OrderApiController {
         List<OrderDto> result = orders.stream()
                 .map(o -> new OrderDto(o))
                 .collect(Collectors.toList());
-현
+
         return result;
     }
 
