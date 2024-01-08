@@ -21,7 +21,7 @@ public class OrderSimpleApiController {
     private final OrderRepository orderRepository;
     private final SimpleQueryRepository simpleQueryRepository;
 
-    @GetMapping("/api/v1/simple-orders")
+    @GetMapping("/api/v1/simple-orders")    //엔티티 직접 노출 사용X
     public List<Order> ordersV1(){
         List<Order> all = orderRepository.findAll();
         for (Order order : all) {
