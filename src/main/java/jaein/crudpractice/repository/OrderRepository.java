@@ -22,4 +22,10 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findAllWithStudentLoan();
 
 
+    @Query("select distinct o from Order o " +
+            "join fetch o.student s " +
+            "join fetch o.loan l " +
+            "join fetch o.orderItems oi " +
+            "join fetch oi.item i")
+    List<Order> findWithItem();
 }
