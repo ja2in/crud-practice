@@ -2,6 +2,7 @@ package jaein.crudpractice.repository;
 
 import jaein.crudpractice.domain.Order;
 import jaein.crudpractice.repository.order.simplequery.OrderSimpleQueryDto;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,4 +29,12 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "join fetch o.orderItems oi " +
             "join fetch oi.item i")
     List<Order> findWithItem();
+
+
+    @Query("select distinct o from Order o " +
+            "join fetch o.student s " +
+            "join fetch o.loan l " +
+            "join fetch o.orderItems oi " +
+            "join fetch oi.item i")
+    List<Order> findAllWithStudentLoan(Pageable pageable);
 }
