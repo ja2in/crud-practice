@@ -7,10 +7,12 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.Optional;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
