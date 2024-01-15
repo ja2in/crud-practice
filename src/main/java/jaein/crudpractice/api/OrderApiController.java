@@ -6,6 +6,7 @@ import jaein.crudpractice.repository.OrderRepository;
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,6 +33,18 @@ public class OrderApiController {
     @GetMapping("/api/v3/orders")
     public List<OrderDto> ordersV3(){
         List<Order> orders = orderRepository.findWithItem();
+
+        List<OrderDto> result = orders.stream()
+                .map(o -> new OrderDto(o))
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
+    @GetMapping("/api/v3.1/orders") //페이징 기능 추가
+    public List<OrderDto> ordersV3_page(Pageable pageable){
+
+        List<Order> orders = orderRepository.findAllWithStudentLoan(pageable);
 
         List<OrderDto> result = orders.stream()
                 .map(o -> new OrderDto(o))
