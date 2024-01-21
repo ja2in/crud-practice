@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Entity
@@ -30,9 +31,9 @@ public class Order {
     @JoinColumn(name = "loan_id")
     private Loan loan; //대출
 
-    private Date loanDate; //대출일
+    private LocalDateTime loanDate; //대출일
 
-    private Date returnDate; //반납일
+    private LocalDateTime returnDate; //반납일
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status; //주문(예약)가능 상태 CAN, CANT
@@ -66,13 +67,9 @@ public class Order {
         }
 
         order.setStatus(OrderStatus.CAN);
-        Date now = new Date();
-        Date back = new Date();
 
-        Calendar cal = Calendar.getInstance();  //반납일 추가
-        cal.setTime(now);
-        cal.add(Calendar.DATE, 14);
-        back = cal.getTime();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime back = now.plus(14, ChronoUnit.DAYS);
 
         order.setLoanDate(now);
         order.setReturnDate(back);
