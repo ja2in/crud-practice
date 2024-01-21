@@ -7,9 +7,11 @@ import jaein.crudpractice.repository.order.simplequery.OrderSimpleQueryDto;
 import jaein.crudpractice.repository.order.simplequery.SimpleQueryRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cglib.core.Local;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,8 +57,8 @@ public class OrderSimpleApiController {
     static class SimpleOrderDto{
         private Long orderId;
         private String name;
-        private Date loanDate;
-        private Date returnDate;
+        private LocalDateTime loanDate;
+        private LocalDateTime returnDate;
         private OrderStatus orderStatus;
 
         public SimpleOrderDto(Order order){
